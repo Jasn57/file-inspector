@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 path = input("Enter file path: ")
 
@@ -21,5 +22,17 @@ elif os.path.isfile(path):
     print("Size:", size, "bytes")
 
     stats = os.stat(path)
-    print("Created:", stats.st_ctime)
-    print("Modified:", stats.st_mtime)
+    print("Created:", datetime.fromtimestamp(stats.st_ctime))
+    print("Modified:", datetime.fromtimestamp(stats.st_mtime))
+
+ext = os.path.splitext(path)[1]
+print("Extension:", ext)
+if ext in [".png", ".jpg", ".jpeg"]:
+    print("Type: Image")
+elif ext in [".txt"]:
+    print("Type: Text file")
+elif ext in [".mp4", ".mov"]:
+    print("Type: Video")
+else:
+    print("Type: Unknown or unsupported")
+
